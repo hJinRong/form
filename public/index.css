@@ -1,0 +1,35 @@
+form {
+  width: 33.3%;
+}
+
+thead td {
+  font-weight: bold;
+}
+
+th, td {
+  border: 1px solid gray;
+  padding: 0.2rem;
+}
+
+#months {
+  height: 30px;
+  width: 400px;
+  display: flex;
+  flex-direction: row;
+}
+
+#months > div {
+  flex: 1 1 30px;
+  background-color: wheat;
+  border: solid 0.5px transparent;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+  user-select: none;
+  margin: 0 2px;
+}
+
+#months > div.selected {
+  background-color: rgb(12, 140, 245);
+  color: white;
+}

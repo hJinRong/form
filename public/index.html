@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <input type="file" id="uploadfile" />
+    <br />
+    <button id="update-table">Update</button>
+    <br />
+
+    <form action="post">
+      <fieldset>
+        <legend>Type</legend>
+        <select name="type" id="type"></select>
+      </fieldset>
+      <fieldset>
+        <legend>Amount</legend>
+        <input type="number" name="amount" id="amount" />
+      </fieldset>
+      <button id="new-bill">Add Bill</button>
+    </form>
+
+    <hr />
+
+    <div id="months">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+      <div>6</div>
+      <div>7</div>
+      <div>8</div>
+      <div>9</div>
+      <div>10</div>
+      <div>11</div>
+      <div>12</div>
+    </div>
+
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>type</th>
+          <th>Time</th>
+          <th>Category</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody id="tb"></tbody>
+    </table>
+
+    <script type="module" src="./dist/index.js"></script>
+  </body>
+</html>
