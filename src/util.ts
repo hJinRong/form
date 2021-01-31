@@ -1,6 +1,5 @@
 import type { Bill, BillRt, CategoryMap } from "./entity";
 import GlobalVal from "./global_val";
-import { fillOptions } from "./ui";
 
 export const parseMS = (msFrom19700101: number) => {
   return new Date(msFrom19700101);
@@ -44,6 +43,23 @@ export const constructGlobalCategoryMap = () => {
     };
   });
   GlobalVal.caMap = obj;
-  fillOptions();
   return obj;
+};
+
+export const calcIncomingAndOutgoing = () => {
+  let incoming = 0,
+    outgoing = 0;
+  if (GlobalVal.selectedMonths.size === 0) {
+    GlobalVal.bills.forEach((bill) => {
+      bill.type === 1 ? (incoming += bill.amount) : (outgoing += bill.amount);
+    });
+  } else {
+    GlobalVal.sortedBill.forEach((bill) => {
+      bill.type === 1 ? (incoming += bill.amount) : (outgoing += bill.amount);
+    });
+  }
+  return {
+    incoming,
+    outgoing,
+  };
 };

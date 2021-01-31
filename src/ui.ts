@@ -1,5 +1,6 @@
 import type { BillRt } from "./entity.js";
 import GlobalVal from "./global_val.js";
+import { calcIncomingAndOutgoing } from "./util.js";
 
 const tbEl = document.querySelector<HTMLTableSectionElement>(
   "#tb"
@@ -7,6 +8,12 @@ const tbEl = document.querySelector<HTMLTableSectionElement>(
 const typeEl = document.querySelector<HTMLSelectElement>(
   "#type"
 ) as HTMLSelectElement;
+const inEl = document.querySelector<HTMLInputElement>(
+  "#incoming"
+) as HTMLInputElement;
+const outEl = document.querySelector<HTMLInputElement>(
+  "#outgoing"
+) as HTMLInputElement;
 
 export function fillTable(bills?: BillRt[]) {
   if (bills && bills.length === 0) {
@@ -21,6 +28,7 @@ export function fillTable(bills?: BillRt[]) {
   } else {
     GlobalVal.bills.forEach((bill) => addField(bill));
   }
+  updateIncomingAndOutgoing();
 }
 
 export function addField(bill: BillRt) {
@@ -47,4 +55,10 @@ export function fillOptions() {
     option.innerText = type;
     typeEl.appendChild(option);
   });
+}
+
+export function updateIncomingAndOutgoing() {
+  const { incoming, outgoing } = calcIncomingAndOutgoing();
+  inEl.value = incoming.toString();
+  outEl.value = outgoing.toString();
 }
