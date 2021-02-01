@@ -31,7 +31,7 @@ export function addField(bill: BillRt) {
   const time = document.createElement("td");
   time.innerText = bill.time.toLocaleString();
   const category = document.createElement("td");
-  category.innerText = bill.category;
+  category.innerText = GlobalVal.caMap2[bill.category].name;
   const amount = document.createElement("td");
   amount.innerText = bill.amount.toString();
   tr.appendChild(type);

@@ -1,4 +1,4 @@
-import type { Bill, BillRt, CategoryMap } from "./entity";
+import type { Bill, BillRt, CategoryMap, CategoryMap2 } from "./entity";
 import GlobalVal from "./global_val";
 
 export const parseMS = (msFrom19700101: number) => {
@@ -56,7 +56,19 @@ export const constructGlobalCategoryMap = () => {
     };
   });
   GlobalVal.caMap = obj;
+  constructGlobalCategoryMap2();
   return obj;
+};
+
+const constructGlobalCategoryMap2 = () => {
+  let obj: CategoryMap2 = {};
+  for (const key of Object.keys(GlobalVal.caMap)) {
+    obj[GlobalVal.caMap[key].id] = {
+      type: GlobalVal.caMap[key].type,
+      name: key,
+    };
+  }
+  GlobalVal.caMap2 = obj;
 };
 
 export const calcIncomingAndOutgoing = () => {

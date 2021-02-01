@@ -20,5 +20,9 @@ export interface Category extends CategoryType {
 }
 
 export interface CategoryMap {
-  [key: string]: { id: string; type: 0 | 1 };
+  [name: string]: { id: string; type: 0 | 1 };
+}
+
+export interface CategoryMap2 {
+  [id: string]: { name: string; type: 0 | 1 };
 }
