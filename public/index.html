@@ -12,7 +12,8 @@
     <button id="update-table">Update</button>
     <br />
 
-    <form action="post">
+    <fieldset>
+      <legend>添加账单</legend>
       <fieldset>
         <legend>Type</legend>
         <select name="type" id="type"></select>
@@ -22,37 +23,45 @@
         <input type="number" name="amount" id="amount" />
       </fieldset>
       <button id="new-bill">Add Bill</button>
-    </form>
+    </fieldset>
 
     <hr />
 
-    <div id="months">
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
-      <div>4</div>
-      <div>5</div>
-      <div>6</div>
-      <div>7</div>
-      <div>8</div>
-      <div>9</div>
-      <div>10</div>
-      <div>11</div>
-      <div>12</div>
-    </div>
-    <br />
-    <label for="incoming">
-      Incoming
-      <br />
-      <input type="text" name="incoming" id="incoming"
-    /></label>
-    <br />
-    <label for="incoming">
-      Outgoing
-      <br />
-      <input type="text" name="outgoing" id="outgoing"
-    /></label>
-    <br />
+    <fieldset>
+      <legend>筛选</legend>
+      <fieldset>
+        <legend>按照月份</legend>
+        <div id="months">
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+          <div>7</div>
+          <div>8</div>
+          <div>9</div>
+          <div>10</div>
+          <div>11</div>
+          <div>12</div>
+        </div>
+      </fieldset>
+    </fieldset>
+
+    <hr />
+
+    <fieldset>
+      <legend>收支情况</legend>
+      <label for="incoming"
+        >Incoming: <input readonly type="text" name="incoming" id="incoming"
+      /></label>
+      <label for="outgoing"
+        >Outgoing: <input readonly type="text" name="outgoing" id="outgoing"
+      /></label>
+    </fieldset>
+
+    <hr />
+
     <table>
       <thead>
         <tr>
