@@ -15,5 +15,6 @@ export default class GlobalVal {
   static categories: Category[] = dev ? fakeCategories : [];
   static caMap: CategoryMap = dev ? fakeCaMap : {};
   static selectedMonths = new Set<number>();
+  static selectedCategories = new Set<string>();
   static sortedBill: BillRt[] = [];
 }

@@ -6,7 +6,8 @@ thead td {
   font-weight: bold;
 }
 
-th, td {
+th,
+td {
   border: 1px solid gray;
   padding: 0.2rem;
 }
@@ -18,7 +19,14 @@ th, td {
   flex-direction: row;
 }
 
-#months > div {
+#categories {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#months > div,
+#categories > div {
   flex: 1 1 30px;
   background-color: wheat;
   border: solid 0.5px transparent;
@@ -26,10 +34,15 @@ th, td {
   line-height: 30px;
   cursor: pointer;
   user-select: none;
-  margin: 0 2px;
+  margin: 2px 2px;
 }
 
-#months > div.selected {
+#categories > div {
+  flex: 0 1 90px;
+}
+
+#months > div.selected,
+#categories > div.selected {
   background-color: rgb(12, 140, 245);
   color: white;
 }

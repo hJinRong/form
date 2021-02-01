@@ -1,11 +1,20 @@
 import type { BillRt } from "./entity";
-import { dev } from "./env";
 import GlobalVal from "./global_val";
 import { readCSV } from "./parser";
-import { fillTable, addField, updateIncomingAndOutgoing, fillOptions } from "./ui";
-import { sortBySelectedMonths } from "./util";
+import {
+  addField,
+  fillCategories,
+  fillOptions,
+  fillTable,
+  updateIncomingAndOutgoing,
+} from "./ui";
+import { sortBySelectedCategories, sortBySelectedMonths } from "./util";
 
 export const init = () => {
+  fillOptions();
+  fillCategories();
+  fillTable();
+
   document.querySelector<HTMLInputElement>("#uploadfile")?.addEventListener(
     "change",
     (e) => {
@@ -73,5 +82,20 @@ export const init = () => {
     })
   );
 
-  dev && fillOptions() && fillTable();
-}
+  document.querySelectorAll("#categories>div").forEach((el) =>
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      const ele = e.target as HTMLDivElement;
+      ele.classList.toggle("selected");
+      const id = GlobalVal.caMap[ele.innerText].id;
+      ele.className.split(" ").indexOf("selected") !== -1
+        ? GlobalVal.selectedCategories.add(id)
+        : GlobalVal.selectedCategories.delete(id);
+      GlobalVal.sortedBill = sortBySelectedCategories(
+        GlobalVal.sortedBill,
+        GlobalVal.selectedCategories
+      );
+      fillTable(GlobalVal.sortedBill);
+    })
+  );
+};

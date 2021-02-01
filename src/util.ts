@@ -34,6 +34,19 @@ export const sortBySelectedMonths = (
   return tmp;
 };
 
+export const sortBySelectedCategories = (
+  bills: BillRt[],
+  selected: Set<string>
+) => {
+  let tmp: BillRt[] = [];
+  bills.forEach((bill) => {
+    if (selected.has(bill.category)) {
+      tmp.push(bill);
+    }
+  });
+  return tmp;
+};
+
 export const constructGlobalCategoryMap = () => {
   let obj: CategoryMap = {};
   GlobalVal.categories.forEach((ca) => {

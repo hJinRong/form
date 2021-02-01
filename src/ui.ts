@@ -8,6 +8,9 @@ const tbEl = document.querySelector<HTMLTableSectionElement>(
 const typeEl = document.querySelector<HTMLSelectElement>(
   "#type"
 ) as HTMLSelectElement;
+const caEl = document.querySelector<HTMLDivElement>(
+  "#categories"
+) as HTMLDivElement;
 const inEl = document.querySelector<HTMLInputElement>(
   "#incoming"
 ) as HTMLInputElement;
@@ -55,6 +58,15 @@ export function fillOptions() {
     option.innerText = type;
     typeEl.appendChild(option);
   });
+}
+
+export const fillCategories = () => {
+  const types = Object.keys(GlobalVal.caMap);
+  types.forEach((type) => {
+    const category = document.createElement("div");
+    category.innerText = type;
+    caEl.appendChild(category);
+  })
 }
 
 export function updateIncomingAndOutgoing() {
