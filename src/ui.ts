@@ -18,19 +18,9 @@ const outEl = document.querySelector<HTMLInputElement>(
   "#outgoing"
 ) as HTMLInputElement;
 
-export function fillTable(bills?: BillRt[]) {
-  if (bills && bills.length === 0) {
-    if (GlobalVal.selectedMonths.size === 0) {
-      fillTable();
-    } else {
-      tbEl.innerHTML = "";
-    }
-  } else if (bills && bills.length !== 0) {
-    tbEl.innerHTML = "";
-    bills.forEach((bi) => addField(bi));
-  } else {
-    GlobalVal.bills.forEach((bill) => addField(bill));
-  }
+export function fillTable() {
+  tbEl.innerHTML = "";
+  GlobalVal.sortedBill.forEach(bill => addField(bill));
   updateIncomingAndOutgoing();
 }
 

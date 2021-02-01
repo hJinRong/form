@@ -62,15 +62,9 @@ export const constructGlobalCategoryMap = () => {
 export const calcIncomingAndOutgoing = () => {
   let incoming = 0,
     outgoing = 0;
-  if (GlobalVal.selectedMonths.size === 0) {
-    GlobalVal.bills.forEach((bill) => {
-      bill.type === 1 ? (incoming += bill.amount) : (outgoing += bill.amount);
-    });
-  } else {
-    GlobalVal.sortedBill.forEach((bill) => {
-      bill.type === 1 ? (incoming += bill.amount) : (outgoing += bill.amount);
-    });
-  }
+  GlobalVal.sortedBill.forEach((bill) => {
+    bill.type === 1 ? (incoming += bill.amount) : (outgoing += bill.amount);
+  });
   return {
     incoming,
     outgoing,

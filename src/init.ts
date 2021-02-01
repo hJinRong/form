@@ -1,18 +1,13 @@
 import type { BillRt } from "./entity";
 import GlobalVal from "./global_val";
 import { readCSV } from "./parser";
-import {
-  addField,
-  fillCategories,
-  fillOptions,
-  fillTable,
-  updateIncomingAndOutgoing,
-} from "./ui";
-import { sortBySelectedCategories, sortBySelectedMonths } from "./util";
+import { updateBills, updateSortedBills } from "./state_watcher";
+import { fillCategories, fillOptions, fillTable } from "./ui";
 
 export const init = () => {
   fillOptions();
   fillCategories();
+  updateSortedBills();
   fillTable();
 
   document.querySelector<HTMLInputElement>("#uploadfile")?.addEventListener(
@@ -24,7 +19,7 @@ export const init = () => {
   );
 
   document.querySelector("#update-table")?.addEventListener("click", () => {
-    fillTable(GlobalVal.bills);
+    fillTable();
   });
 
   document.querySelector("#new-bill")?.addEventListener("click", (e) => {
@@ -39,7 +34,7 @@ export const init = () => {
       typeof typeEl.value === "undefined" ||
       typeof amountEl.value === "undefined"
     ) {
-      alert("请检查是否没有上传 category.csv 文件 和 输入金额");
+      alert("请上传 category.csv 文件并输入金额");
     } else {
       const bill: BillRt = {
         type: GlobalVal.caMap[typeEl.value].type,
@@ -47,21 +42,9 @@ export const init = () => {
         category: GlobalVal.caMap[typeEl.value].id,
         amount: Number.parseInt(amountEl.value, 10),
       };
-      GlobalVal.bills.push(bill);
-      GlobalVal.sortedBill = sortBySelectedMonths(
-        GlobalVal.bills,
-        GlobalVal.selectedMonths
-      );
-      if (
-        // 显示全部
-        GlobalVal.selectedMonths.size === 0 ||
-        // 显示部分，并且所在月份被选中
-        (GlobalVal.selectedMonths.size !== 0 &&
-          GlobalVal.selectedMonths.has(new Date(bill.time).getMonth() + 1))
-      ) {
-        addField(bill);
-      }
-      updateIncomingAndOutgoing();
+      updateBills(bill);
+      updateSortedBills();
+      fillTable();
     }
   });
 
@@ -74,11 +57,8 @@ export const init = () => {
       ele.className.split(" ").indexOf("selected") !== -1
         ? GlobalVal.selectedMonths.add(month)
         : GlobalVal.selectedMonths.delete(month);
-      GlobalVal.sortedBill = sortBySelectedMonths(
-        GlobalVal.bills,
-        GlobalVal.selectedMonths
-      );
-      fillTable(GlobalVal.sortedBill);
+      updateSortedBills();
+      fillTable();
     })
   );
 
@@ -91,11 +71,8 @@ export const init = () => {
       ele.className.split(" ").indexOf("selected") !== -1
         ? GlobalVal.selectedCategories.add(id)
         : GlobalVal.selectedCategories.delete(id);
-      GlobalVal.sortedBill = sortBySelectedCategories(
-        GlobalVal.sortedBill,
-        GlobalVal.selectedCategories
-      );
-      fillTable(GlobalVal.sortedBill);
+      updateSortedBills();
+      fillTable();
     })
   );
 };
