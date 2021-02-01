@@ -1,4 +1,5 @@
 import type { BillRt } from "./entity";
+import { dev } from "./env";
 import GlobalVal from "./global_val";
 import { readCSV } from "./parser";
 import { updateBills, updateSortedBills } from "./state_watcher";
@@ -62,6 +63,10 @@ export const init = () => {
     })
   );
 
+  dev && listenToCategoryButtons();
+};
+
+export const listenToCategoryButtons = () => {
   document.querySelectorAll("#categories>div").forEach((el) =>
     el.addEventListener("click", (e) => {
       e.preventDefault();
@@ -75,4 +80,4 @@ export const init = () => {
       fillTable();
     })
   );
-};
+}

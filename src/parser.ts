@@ -1,6 +1,7 @@
 import type { BillRt, Category } from "./entity.js";
 import GlobalVal from "./global_val.js";
-import { fillOptions } from "./ui.js";
+import { listenToCategoryButtons } from "./init.js";
+import { fillCategories, fillOptions } from "./ui.js";
 import { constructGlobalCategoryMap } from "./util.js";
 
 export const readCSV = (input: HTMLInputElement) => {
@@ -35,6 +36,8 @@ const parseData = (data: string) => {
     GlobalVal.categories.push(...categories);
     constructGlobalCategoryMap();
     fillOptions();
+    fillCategories();
+    listenToCategoryButtons();
     return categories;
   } else if (csvData[0].length === 4) {
     let bills: BillRt[] = [];
