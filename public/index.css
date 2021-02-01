@@ -1,5 +1,11 @@
-form {
-  width: 33.3%;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+table {
+  width: 100%;
 }
 
 thead td {
@@ -10,6 +16,7 @@ th,
 td {
   border: 1px solid gray;
   padding: 0.2rem;
+  text-align: center;
 }
 
 #months {
@@ -45,4 +52,18 @@ td {
 #categories > div.selected {
   background-color: rgb(12, 140, 245);
   color: white;
+}
+
+#workbench {
+  float: left;
+  width: 60%;
+  margin: 0 10;
+}
+
+#table {
+  float: left;
+  width: 40%;
+  height: 100vh;
+  overflow-y: scroll;
+  margin: 0 10;
 }
